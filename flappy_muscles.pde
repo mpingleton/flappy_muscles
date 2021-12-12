@@ -50,7 +50,11 @@ void draw() {
   
   // Draw the bird.
   bird.updatePosition(millis() - lastFrame);
-  image(birdImage, vp.getPixelPositionX(bird.x) - (vp.unitWidth() / 2.f), vp.getPixelPositionY(bird.y) - (vp.unitHeight() / 2.f), vp.unitWidth(), vp.unitHeight());
+  pushMatrix();
+  translate(vp.getPixelPositionX(bird.x) - (vp.unitWidth() / 2.f), vp.getPixelPositionY(bird.y) - (vp.unitHeight() / 2.f));
+  rotate(-bird.yVel / 20.f);
+  image(birdImage, -vp.unitWidth() / 2.f, -vp.unitHeight() / 2.f, vp.unitWidth(), vp.unitHeight());
+  popMatrix();
   
   // Update last frame time.
   lastFrame = millis();
