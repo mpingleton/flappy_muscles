@@ -15,7 +15,7 @@ void setup() {
   vp.top = 6.f;
   vp.bottom = -6.f;
   
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < gates.length; i++) {
     gates[i] = new Gate();
     gates[i].positionX = 0.f;
     gates[i].openingTop = 2.f;
@@ -31,7 +31,10 @@ void draw() {
   background(0, 0, 0);
   
   // Draw the gates.
+  for (int i = 0; i < gates.length; i++) {
+   
+  }
   
   // Draw the bird.
-  image(birdImage, 300, 300);
+  image(birdImage, 300, 300, );
 }
