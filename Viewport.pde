@@ -1,7 +1,7 @@
 
 class Viewport {
 
-  float left = 0.f, right = 10.f, top = 5.f, bottom = -5.f;
+  float left = 0.f, right = 0.f, top = 0.f, bottom = -0.f;
   
   float getPixelPositionX(float viewportX) {
     return ((viewportX - left) / (right - left)) * width;

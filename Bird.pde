@@ -2,7 +2,7 @@
 class Bird {
 
   // Main data points.
-  float x = 0.f, y = 0.f, r = 0.f;
+  float x = 1.f, y = 1.f, r = 0.f;
   float xVel = 0.f, yVel = 0.f; // Units per second.
   
   void updatePosition(float timeDelta) {
