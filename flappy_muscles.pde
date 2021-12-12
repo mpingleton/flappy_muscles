@@ -43,8 +43,8 @@ void draw() {
   for (int i = 0; i < gates.length; i++) {
     pushMatrix();
     translate(vp.getPixelPositionX(gates[i].positionX), 0);
-    rect(-25, 0, 50, vp.getPixelPositionY(gates[i].openingTop));
-    rect(-25, vp.getPixelPositionY(gates[i].openingBottom), 50, height - vp.getPixelPositionY(gates[i].openingBottom));
+    rect(-vp.unitWidth() / 2.f, 0, vp.unitWidth(), vp.getPixelPositionY(gates[i].openingTop));
+    rect(-vp.unitWidth() / 2.f, vp.getPixelPositionY(gates[i].openingBottom), vp.unitWidth(), height - vp.getPixelPositionY(gates[i].openingBottom));
     popMatrix();
   }
   
