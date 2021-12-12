@@ -32,6 +32,12 @@ void draw() {
   // Clear the screen.
   background(0, 0, 0);
   
+  // Move the viewport if nessesary.
+  if (bird.x >= 6.f) {
+    vp.left = bird.x - 6.f;
+    vp.right = bird.x + 10.f;
+  }
+  
   // Draw the gates.
   fill(0, 255, 0);
   for (int i = 0; i < gates.length; i++) {
