@@ -8,6 +8,6 @@ class Viewport {
   }
   
   float getPixelPositionY(float viewportY) {
-    return (((viewportY - bottom) / (top - bottom)) * height);
+    return height - (((viewportY - bottom) / (top - bottom)) * height);
   }
 }
