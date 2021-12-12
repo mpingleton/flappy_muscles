@@ -55,3 +55,7 @@ void draw() {
   // Update last frame time.
   lastFrame = millis();
 }
+
+void keyPressed() {
+  bird.yVel = 5.f;
+}
