@@ -26,6 +26,8 @@ void setup() {
   birdImage = loadImage("bird.png");
 }
 
+int lastFrame = 0;
+
 void draw() {
   // Clear the screen.
   background(0, 0, 0);
@@ -41,5 +43,9 @@ void draw() {
   }
   
   // Draw the bird.
+  bird.updatePosition(millis() - lastFrame);
   image(birdImage, vp.getPixelPositionX(bird.x) - (vp.unitWidth() / 2.f), vp.getPixelPositionY(bird.y) - (vp.unitHeight() / 2.f), vp.unitWidth(), vp.unitHeight());
+  
+  // Update last frame time.
+  lastFrame = millis();
 }
