@@ -18,8 +18,8 @@ void setup() {
   for (int i = 0; i < gates.length; i++) {
     gates[i] = new Gate();
     gates[i].positionX = (i * 5.f) + 6.f;
-    gates[i].openingTop = 2.f;
-    gates[i].openingBottom = -2.f;
+    gates[i].openingTop = abs(cos(i * 1.7)) * 2 + 1;
+    gates[i].openingBottom = -abs(cos(i * 1.4)) * 2 - 1;
   }
   
   // Load the image assets.
