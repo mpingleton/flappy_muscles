@@ -11,4 +11,14 @@ class Gate {
     openingTop = withTop;
     openingBottom = withBottom;
   }
+  
+  boolean collision(Bird bird) {
+    if (bird.x + bird.r >= positionX - (w / 2.f) && bird.x - bird.r <= positionX + (w / 2.f)) {
+      if (bird.y + (bird.r * 0.8f) >= openingTop || bird.y - (bird.r * 0.8f) <= openingBottom) {
+        return true;
+      }
+    }
+    
+    return false;
+  }
 }

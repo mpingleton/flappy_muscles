@@ -43,17 +43,22 @@ void draw() {
   for (int i = 0; i < gates.length; i++) {
     pushMatrix();
     translate(vp.getPixelPositionX(gates[i].positionX), 0);
-    rect(-vp.unitWidth() / 2.f, 0, vp.unitWidth(), vp.getPixelPositionY(gates[i].openingTop));
-    rect(-vp.unitWidth() / 2.f, vp.getPixelPositionY(gates[i].openingBottom), vp.unitWidth(), height - vp.getPixelPositionY(gates[i].openingBottom));
+    rect(-vp.unitWidth() * gates[i].w / 2.f, 0, vp.unitWidth() * gates[i].w, vp.getPixelPositionY(gates[i].openingTop));
+    rect(-vp.unitWidth() * gates[i].w / 2.f, vp.getPixelPositionY(gates[i].openingBottom), vp.unitWidth() * gates[i].w, height - vp.getPixelPositionY(gates[i].openingBottom));
     popMatrix();
+    if (gates[i].collision(bird)) {
+      bird.xVel = 0.f;
+      bird.yVel = 0.f;
+      bird.yAccel = 0.f;
+    }
   }
   
   // Draw the bird.
   bird.updatePosition(millis() - lastFrame);
   pushMatrix();
-  translate(vp.getPixelPositionX(bird.x) - (vp.unitWidth() / 2.f), vp.getPixelPositionY(bird.y) - (vp.unitHeight() / 2.f));
+  translate(vp.getPixelPositionX(bird.x), vp.getPixelPositionY(bird.y));
   rotate(-bird.yVel / 20.f);
-  image(birdImage, -vp.unitWidth() / 2.f, -vp.unitHeight() / 2.f, vp.unitWidth(), vp.unitHeight());
+  image(birdImage, -vp.unitWidth() * bird.r, -vp.unitHeight() * bird.r, vp.unitWidth() * bird.r * 2.f, vp.unitHeight() * bird.r * 2.f);
   popMatrix();
   
   // Update last frame time.
