@@ -1,7 +1,7 @@
 
 Viewport vp = new Viewport();
 Bird bird = new Bird();
-Gate[] gates = new Gate[100];
+Gate[] gates = new Gate[45];
 
 PImage birdImage;
 
