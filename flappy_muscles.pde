@@ -4,6 +4,7 @@ Bird bird = new Bird();
 Gate[] gates = new Gate[45];
 
 PImage birdImage;
+PImage backgroundImage;
 
 void setup() {
   // Set up the graphics window.
@@ -24,13 +25,15 @@ void setup() {
   
   // Load the image assets.
   birdImage = loadImage("bird.png");
+  backgroundImage = loadImage("flappy-background.png");
 }
 
 int lastFrame = 0;
 
 void draw() {
-  // Clear the screen.
+  // Clear the screen and draw the background.
   background(0, 0, 0);
+  image(backgroundImage, 0, 0, width, height);
   
   // Move the viewport if nessesary.
   if (bird.x >= 6.f) {
