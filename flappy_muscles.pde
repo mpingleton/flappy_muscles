@@ -33,7 +33,7 @@ int lastFrame = 0;
 void draw() {
   // Clear the screen and draw the background.
   background(0, 0, 0);
-  //image(backgroundImage, 0, 0, width, height);
+  //image(backgroundImage, 0, 0, width, height); // This call is too heavy and impacts the framerate.
   
   // Move the viewport if nessesary.
   if (bird.x >= 6.f) {
@@ -47,7 +47,7 @@ void draw() {
     pushMatrix();
     translate(vp.getPixelPositionX(gates[i].positionX), 0);
     rect(-vp.unitWidth() * gates[i].w / 2.f, 0, vp.unitWidth() * gates[i].w, vp.getPixelPositionY(gates[i].openingTop));
-    rect(-vp.unitWidth() * gates[i].w / 2.f, vp.getPixelPositionY(gates[i].openingBottom), vp.unitWidth() * gates[i].w, height - vp.getPixelPositionY(gates[i].openingBottom));
+    rect(-vp.unitWidth() * gates[i].w / 2.f, vp.getPixelPositionY(gates[i].openingBottom), vp.unitWidth() * gates[i].w, (float)height - vp.getPixelPositionY(gates[i].openingBottom));
     popMatrix();
     if (gates[i].collision(bird)) {
       bird.xVel = 0.f;
@@ -57,7 +57,7 @@ void draw() {
   }
   
   // Draw the bird.
-  bird.updatePosition(millis() - lastFrame);
+  bird.updatePosition((float)millis() - (float)lastFrame);
   pushMatrix();
   translate(vp.getPixelPositionX(bird.x), vp.getPixelPositionY(bird.y));
   rotate(-bird.yVel / 20.f);
