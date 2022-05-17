@@ -33,7 +33,7 @@ int lastFrame = 0;
 void draw() {
   // Clear the screen and draw the background.
   background(0, 0, 0);
-  image(backgroundImage, 0, 0, width, height);
+  //image(backgroundImage, 0, 0, width, height);
   
   // Move the viewport if nessesary.
   if (bird.x >= 6.f) {
