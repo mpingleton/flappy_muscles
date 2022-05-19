@@ -1,3 +1,4 @@
+Controller controller;
 
 Viewport vp = new Viewport();
 Bird bird = new Bird();
@@ -9,6 +10,10 @@ PImage backgroundImage;
 void setup() {
   // Set up the graphics window.
   fullScreen();
+  
+  // Connect to the controller.
+  controller = new Controller();
+  controller.connect(this, "/dev/cu.usbmodem11301");
   
   // Initialize the data members.
   vp.left = 0.f;
@@ -28,9 +33,15 @@ void setup() {
   backgroundImage = loadImage("flappy-background.png");
 }
 
+void serialEvent(Serial s) {
+  controller.event(s);
+}
+
 int lastFrame = 0;
 
 void draw() {
+  controller.check();
+  
   // Clear the screen and draw the background.
   background(0, 0, 0);
   //image(backgroundImage, 0, 0, width, height); // This call is too heavy and impacts the framerate.
@@ -68,6 +79,14 @@ void draw() {
   lastFrame = millis();
 }
 
+void sensorEvent() {
+  if(controller.sensorValue - controller.sensorValuePrev < -20) {
+    bird.yVel = (float)(controller.sensorValuePrev - controller.sensorValue) / 60.f;
+  }
+}
+
+/*
 void keyPressed() {
   bird.yVel = 5.f;
 }
+*/
