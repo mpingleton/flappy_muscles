@@ -43,7 +43,9 @@ class Controller {
       sensorValue = Integer.parseInt(inputString.trim());
       sensorWaiting = false;
       sensorWaitingTime = millis();
-      sensorEvent();
+      if(sensorValue > 0 && sensorValuePrev > 0) {
+        sensorEvent();
+      }
     }
   }
 }

@@ -3,6 +3,8 @@ Controller controller;
 Viewport vp = new Viewport();
 Bird bird = new Bird();
 Gate[] gates = new Gate[45];
+boolean gameStarted = false;
+boolean gameOver = false;
 
 PImage birdImage;
 PImage backgroundImage;
@@ -40,7 +42,9 @@ void serialEvent(Serial s) {
 int lastFrame = 0;
 
 void draw() {
-  controller.check();
+  if(!gameOver) {
+    controller.check();
+  }
   
   // Clear the screen and draw the background.
   background(0, 0, 0);
@@ -64,6 +68,7 @@ void draw() {
       bird.xVel = 0.f;
       bird.yVel = 0.f;
       bird.yAccel = 0.f;
+      gameOver = true;
     }
   }
   
@@ -75,13 +80,35 @@ void draw() {
   image(birdImage, -vp.unitWidth() * bird.r, -vp.unitHeight() * bird.r, vp.unitWidth() * bird.r * 2.f, vp.unitHeight() * bird.r * 2.f);
   popMatrix();
   
+  // Draw the game over.
+  if(gameOver) {
+    fill(0, 255, 0);
+    textSize(80);
+    text("Game Over", width / 2, height / 2);
+  }
+  
+  // Draw the intro.
+  if(!gameStarted) {
+    fill(0, 255, 0);
+    textSize(50);
+    text("Pull up on the machine to start.", width / 2, height / 2);
+  }
+  
   // Update last frame time.
   lastFrame = millis();
 }
 
 void sensorEvent() {
   if(controller.sensorValue - controller.sensorValuePrev < -20) {
-    bird.yVel = (float)(controller.sensorValuePrev - controller.sensorValue) / 60.f;
+    if(gameStarted) {
+      bird.yVel = (float)(controller.sensorValuePrev - controller.sensorValue) / 60.f;
+    }
+    else if(controller.sensorValue - controller.sensorValuePrev < -100) {
+      gameStarted = true;
+      bird.yAccel = -6.0f;
+      bird.xVel = 3.0f;
+      bird.yVel = 0.0f;
+    }
   }
 }
 
