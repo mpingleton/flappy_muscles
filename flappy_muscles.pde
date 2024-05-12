@@ -15,7 +15,7 @@ void setup() {
   
   // Connect to the controller.
   controller = new Controller();
-  controller.connect(this, "/dev/cu.usbmodem11301");
+  controller.connect(this, "/dev/cu.usbserial-21140");
   
   // Initialize the data members.
   vp.left = 0.f;
